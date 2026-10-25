@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+
+    <style>
+        /* Basic page styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #172554;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 26px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 18px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #fbbf24;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+            margin-bottom: 15px;
+            background-color: #dbeafe;
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        /* Main content */
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: white;
+            padding: 28px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            scroll-margin-top: 20px;
+        }
+
+        section h2 {
+            color: #1d4ed8;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #fbbf24;
+            padding-bottom: 8px;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 4px solid #2563eb;
+        }
+
+        /* Skills */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .skills-list li {
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* Contact */
+        #contact a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        #contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #172554;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px 8px;
+            }
+
+            .hero h2 {
+                font-size: 26px;
+            }
+
+            section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Website header and navigation -->
+    <header>
+        <h1>My Portfolio</h1>
+
+        <nav aria-label="Main navigation">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Introduction section -->
+    <div class="hero">
+        <img
+            src="profile.jpg"
+            alt="My profile photo"
+            class="profile-photo"
+        >
+
+        <h2>Hello, I'm Your Name!</h2>
+        <p>Aspiring Web Developer | Student | Creative Learner</p>
+    </div>
+
+    <!-- Main content -->
+    <main>
+
+        <!-- About section -->
+        <section id="about">
+            <h2>About Me</h2>
+
+            <p>
+                Hello! I am a student who is passionate about technology
+                and web development. I enjoy learning new skills,
+                solving problems, and creating attractive websites.
+                My goal is to become a skilled web developer and build
+                useful, user-friendly web applications.
+            </p>
+        </section>
+
+        <!-- Education section -->
+        <section id="education">
+            <h2>Education</h2>
+
+            <div class="education-item">
+                <h3>Current Degree / Course</h3>
+                <p>Your College or University Name</p>
+                <p>Year: 2024 – Present</p>
+            </div>
+
+            <div class="education-item">
+                <h3>Higher Secondary Education</h3>
+                <p>Your School Name</p>
+                <p>Year: 2022 – 2024</p>
+            </div>
+
+            <div class="education-item">
+                <h3>Secondary Education</h3>
+                <p>Your School Name</p>
+                <p>Year: 2022</p>
+            </div>
+        </section>
+
+        <!-- Skills section -->
+        <section id="skills">
+            <h2>My Skills</h2>
+
+            <p>Here are some of the skills I am learning:</p>
+
+            <ul class="skills-list">
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>Basic JavaScript</li>
+                <li>Communication</li>
+                <li>Problem Solving</li>
+                <li>Teamwork</li>
+            </ul>
+        </section>
+
+        <!-- Contact section -->
+        <section id="contact">
+            <h2>Contact Me</h2>
+
+            <p>
+                I would love to connect and learn about new opportunities.
+            </p>
+
+            <p>
+                Email:
+                <a href="mailto:yourname@example.com">
+                    yourname@example.com
+                </a>
+            </p>
+
+            <p>Location: Your City, Your Country</p>
+
+            <p>
+                LinkedIn:
+                <a href="https://www.linkedin.com/" target="_blank"
+                   rel="noopener noreferrer">
+                    Visit my LinkedIn
+                </a>
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Website footer -->
+    <footer>
+        <p>&copy; 2026 Your Name. All rights reserved.</p>
+        <p>Created with HTML and CSS.</p>
+    </footer>
+
+</body>
+</html>
