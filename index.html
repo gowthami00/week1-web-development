@@ -4,245 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Image Gallery</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        header {
-            background: linear-gradient(135deg, #312e81, #7c3aed);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            color: #ede9fe;
-        }
-
-        .gallery-container {
-            max-width: 1100px;
-            margin: 35px auto;
-            padding: 0 20px;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            border-radius: 14px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px #00000018;
-            transition: transform 0.3s ease,
-                        box-shadow 0.3s ease;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.04);
-            box-shadow: 0 12px 25px #00000030;
-        }
-
-        /* Lightbox background */
-        .lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.92);
-            align-items: center;
-            justify-content: center;
-            padding: 50px 20px;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 10px;
-            animation: zoomIn 0.3s ease;
-        }
-
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: white;
-            font-size: 42px;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        .caption {
-            position: absolute;
-            bottom: 20px;
-            color: white;
-            text-align: center;
-            font-size: 16px;
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.7);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        footer {
-            background: #312e81;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .gallery img {
-                height: 200px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery img {
-                height: 250px;
-            }
-
-            header h1 {
-                font-size: 26px;
-            }
-        }
-    </style>
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header>
-        <h1>My Image Gallery</h1>
-        <p>Explore beautiful places around the world</p>
-    </header>
+    <div class="weather-card">
+        <h1>Weather App</h1>
+        <p class="subtitle">Check the weather in your city</p>
 
-    <main class="gallery-container">
-        <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900"
-                 alt="Beautiful mountain landscape">
-
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900"
-                 alt="Peaceful tropical beach">
-
-            <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=900"
-                 alt="Ocean waves">
-
-            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900"
-                 alt="Lake surrounded by mountains">
-
-            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900"
-                 alt="Green forest">
-
-            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900"
-                 alt="Mountain beneath a starry sky">
-
-            <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=900"
-                 alt="Sunrise over a landscape">
-
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900"
-                 alt="Snow-covered mountain peaks">
+        <div class="search-box">
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter city name"
+            >
+            <button id="searchBtn">Search</button>
         </div>
-    </main>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" role="dialog"
-         aria-modal="true" aria-label="Image preview">
+        <p id="message"></p>
 
-        <button class="close" id="closeBtn"
-                aria-label="Close image preview">&times;</button>
+        <div id="weatherInfo" class="weather-info hidden">
+            <h2 id="cityName">City</h2>
+            <p id="weatherIcon">🌤️</p>
+            <h3 id="temperature">--°C</h3>
+            <p id="condition">Weather condition</p>
 
-        <img id="lightboxImage" src="" alt="">
+            <div class="details">
+                <div class="detail-box">
+                    <p>Humidity</p>
+                    <h3 id="humidity">--%</h3>
+                </div>
 
-        <p class="caption" id="caption"></p>
+                <div class="detail-box">
+                    <p>Feels Like</p>
+                    <h3 id="feelsLike">--°C</h3>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 My Image Gallery | Week 2 Web Development</p>
-    </footer>
-
-    <script>
-        const images = document.querySelectorAll(".gallery img");
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImage = document.getElementById("lightboxImage");
-        const caption = document.getElementById("caption");
-        const closeBtn = document.getElementById("closeBtn");
-
-        // Open the lightbox when an image is clicked
-        images.forEach(function(image) {
-            image.addEventListener("click", function() {
-                lightboxImage.src = image.src;
-                lightboxImage.alt = image.alt;
-                caption.textContent = image.alt;
-
-                lightbox.classList.add("active");
-                closeBtn.focus();
-            });
-        });
-
-        // Close using the close button
-        function closeLightbox() {
-            lightbox.classList.remove("active");
-            lightboxImage.src = "";
-        }
-
-        closeBtn.addEventListener("click", closeLightbox);
-
-        // Close when clicking the dark background
-        lightbox.addEventListener("click", function(event) {
-            if (event.target === lightbox) {
-                closeLightbox();
-            }
-        });
-
-        // Close using the Escape key
-        document.addEventListener("keydown", function(event) {
-            if (event.key === "Escape") {
-                closeLightbox();
-            }
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
