@@ -4,45 +4,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+    <title>Student Management System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="weather-card">
-        <h1>Weather App</h1>
-        <p class="subtitle">Check the weather in your city</p>
-
-        <div class="search-box">
-            <input
-                type="text"
-                id="cityInput"
-                placeholder="Enter city name"
-            >
-            <button id="searchBtn">Search</button>
-        </div>
-
-        <p id="message"></p>
-
-        <div id="weatherInfo" class="weather-info hidden">
-            <h2 id="cityName">City</h2>
-            <p id="weatherIcon">🌤️</p>
-            <h3 id="temperature">--°C</h3>
-            <p id="condition">Weather condition</p>
-
-            <div class="details">
-                <div class="detail-box">
-                    <p>Humidity</p>
-                    <h3 id="humidity">--%</h3>
-                </div>
-
-                <div class="detail-box">
-                    <p>Feels Like</p>
-                    <h3 id="feelsLike">--°C</h3>
-                </div>
+    <div class="app">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">STUDENT PORTAL</p>
+                <h1>Student Management</h1>
+                <p class="subtitle">Manage your student records in one place.</p>
             </div>
-        </div>
+            <button id="addStudentBtn" class="primary-btn">
+                + Add Student
+            </button>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <p>Total Students</p>
+                <h2 id="totalStudents">0</h2>
+                <span>All registered students</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Departments</p>
+                <h2 id="totalDepartments">0</h2>
+                <span>Departments represented</span>
+            </div>
+
+            <div class="stat-card">
+                <p>First Year</p>
+                <h2 id="firstYearCount">0</h2>
+                <span>Students in first year</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Final Year</p>
+                <h2 id="finalYearCount">0</h2>
+                <span>Students in final year</span>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h2>Student Records</h2>
+                    <p>View, search, and manage students.</p>
+                </div>
+                <span id="recordCount" class="record-count">0 records</span>
+            </div>
+
+            <div class="toolbar">
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search by name, ID, or email..."
+                    aria-label="Search students"
+                >
+
+                <select id="departmentFilter" aria-label="Filter by department">
+                    <option value="">All Departments</option>
+                    <option value="AME">AME</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="Mechanical">Mechanical</option>
+                </select>
+
+                <select id="yearFilter" aria-label="Filter by year">
+                    <option value="">All Years</option>
+                    <option value="1">First Year</option>
+                    <option value="2">Second Year</option>
+                    <option value="3">Third Year</option>
+                    <option value="4">Final Year</option>
+                </select>
+
+                <button id="resetFiltersBtn" class="secondary-btn">
+                    Reset
+                </button>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Year</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody"></tbody>
+                </table>
+            </div>
+
+            <p id="emptyState" class="empty-state">
+                No students found. Add a student to get started.
+            </p>
+        </section>
+
+        <footer>
+            Student Management System · Data saved in this browser
+        </footer>
     </div>
+
+    <!-- Add/Edit Student Dialog -->
+    <dialog id="studentDialog">
+        <form id="studentForm">
+            <div class="dialog-heading">
+                <div>
+                    <h2 id="dialogTitle">Add Student</h2>
+                    <p>Enter the student's information below.</p>
+                </div>
+                <button
+                    type="button"
+                    id="closeDialogBtn"
+                    class="close-btn"
+                    aria-label="Close dialog"
+                >×</button>
+            </div>
+
+            <label for="studentId">Student ID</label>
+            <input
+                id="studentId"
+                name="studentId"
+                required
+                maxlength="30"
+                placeholder="e.g. STU101"
+            >
+
+            <label for="studentName">Full Name</label>
+            <input
+                id="studentName"
+                name="studentName"
+                required
+                maxlength="100"
+                placeholder="Enter full name"
+            >
+
+            <label for="studentEmail">Email Address</label>
+            <input
+                id="studentEmail"
+                name="studentEmail"
+                type="email"
+                required
+                maxlength="254"
+                placeholder="student@example.com"
+            >
+
+            <label for="studentDepartment">Department</label>
+            <select id="studentDepartment" name="studentDepartment" required>
+                <option value="">Select department</option>
+                <option value="AME">AME</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="Mechanical">Mechanical</option>
+            </select>
+
+            <label for="studentYear">Academic Year</label>
+            <select id="studentYear" name="studentYear" required>
+                <option value="">Select year</option>
+                <option value="1">First Year</option>
+                <option value="2">Second Year</option>
+                <option value="3">Third Year</option>
+                <option value="4">Final Year</option>
+            </select>
+
+            <p id="formError" class="form-error" role="alert"></p>
+
+            <div class="dialog-actions">
+                <button type="button" id="cancelBtn" class="secondary-btn">
+                    Cancel
+                </button>
+                <button type="submit" class="primary-btn">
+                    Save Student
+                </button>
+            </div>
+        </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
 </body>
