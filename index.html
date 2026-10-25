@@ -4,161 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Portfolio</title>
+    <title>Interactive Image Gallery</title>
 
     <style>
-        /* Basic page styling */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
         }
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f7fb;
-            color: #333;
-            line-height: 1.6;
+            background: #f1f5f9;
+            color: #1e293b;
         }
 
-        /* Header */
         header {
-            background-color: #172554;
+            background: linear-gradient(135deg, #312e81, #7c3aed);
             color: white;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            text-align: center;
+            padding: 40px 20px;
         }
 
         header h1 {
-            font-size: 26px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 18px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            color: #fbbf24;
-        }
-
-        /* Hero section */
-        .hero {
-            background: linear-gradient(135deg, #1e3a8a, #2563eb);
-            color: white;
-            text-align: center;
-            padding: 55px 20px;
-        }
-
-        .profile-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 4px solid white;
-            object-fit: cover;
-            margin-bottom: 15px;
-            background-color: #dbeafe;
-        }
-
-        .hero h2 {
             font-size: 32px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
-        .hero p {
-            font-size: 17px;
+        header p {
+            color: #ede9fe;
         }
 
-        /* Main content */
-        main {
-            max-width: 1000px;
-            margin: 30px auto;
+        .gallery-container {
+            max-width: 1100px;
+            margin: 35px auto;
             padding: 0 20px;
         }
 
-        section {
-            background-color: white;
-            padding: 28px;
-            margin-bottom: 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            scroll-margin-top: 20px;
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
-        section h2 {
-            color: #1d4ed8;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #fbbf24;
-            padding-bottom: 8px;
+        .gallery img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px #00000018;
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
         }
 
-        /* Education */
-        .education-item {
-            margin-bottom: 15px;
-            padding-left: 15px;
-            border-left: 4px solid #2563eb;
+        .gallery img:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 25px #00000030;
         }
 
-        /* Skills */
-        .skills-list {
+        /* Lightbox background */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.92);
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .lightbox.active {
             display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            list-style: none;
         }
 
-        .skills-list li {
-            background-color: #dbeafe;
-            color: #1e40af;
-            padding: 10px 18px;
-            border-radius: 20px;
-            font-weight: bold;
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+            animation: zoomIn 0.3s ease;
         }
 
-        /* Contact */
-        #contact a {
-            color: #2563eb;
-            text-decoration: none;
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 42px;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
-        #contact a:hover {
-            text-decoration: underline;
+        .caption {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            text-align: center;
+            font-size: 16px;
         }
 
-        /* Footer */
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
         footer {
-            background-color: #172554;
+            background: #312e81;
             color: white;
             text-align: center;
             padding: 20px;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
-        /* Responsive design */
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                text-align: center;
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            nav a {
-                display: inline-block;
-                margin: 5px 8px;
+            .gallery img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
             }
 
-            .hero h2 {
+            .gallery img {
+                height: 250px;
+            }
+
+            header h1 {
                 font-size: 26px;
-            }
-
-            section {
-                padding: 20px;
             }
         }
     </style>
@@ -166,118 +153,96 @@
 
 <body>
 
-    <!-- Website header and navigation -->
     <header>
-        <h1>My Portfolio</h1>
-
-        <nav aria-label="Main navigation">
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-        </nav>
+        <h1>My Image Gallery</h1>
+        <p>Explore beautiful places around the world</p>
     </header>
 
-    <!-- Introduction section -->
-    <div class="hero">
-        <img
-            src="profile.jpg"
-            alt="My profile photo"
-            class="profile-photo"
-        >
+    <main class="gallery-container">
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900"
+                 alt="Beautiful mountain landscape">
 
-        <h2>Hello, I'm Your Name!</h2>
-        <p>Aspiring Web Developer | Student | Creative Learner</p>
-    </div>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900"
+                 alt="Peaceful tropical beach">
 
-    <!-- Main content -->
-    <main>
+            <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=900"
+                 alt="Ocean waves">
 
-        <!-- About section -->
-        <section id="about">
-            <h2>About Me</h2>
+            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900"
+                 alt="Lake surrounded by mountains">
 
-            <p>
-                Hello! I am a student who is passionate about technology
-                and web development. I enjoy learning new skills,
-                solving problems, and creating attractive websites.
-                My goal is to become a skilled web developer and build
-                useful, user-friendly web applications.
-            </p>
-        </section>
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900"
+                 alt="Green forest">
 
-        <!-- Education section -->
-        <section id="education">
-            <h2>Education</h2>
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900"
+                 alt="Mountain beneath a starry sky">
 
-            <div class="education-item">
-                <h3>Current Degree / Course</h3>
-                <p>Your College or University Name</p>
-                <p>Year: 2024 – Present</p>
-            </div>
+            <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=900"
+                 alt="Sunrise over a landscape">
 
-            <div class="education-item">
-                <h3>Higher Secondary Education</h3>
-                <p>Your School Name</p>
-                <p>Year: 2022 – 2024</p>
-            </div>
-
-            <div class="education-item">
-                <h3>Secondary Education</h3>
-                <p>Your School Name</p>
-                <p>Year: 2022</p>
-            </div>
-        </section>
-
-        <!-- Skills section -->
-        <section id="skills">
-            <h2>My Skills</h2>
-
-            <p>Here are some of the skills I am learning:</p>
-
-            <ul class="skills-list">
-                <li>HTML5</li>
-                <li>CSS3</li>
-                <li>Basic JavaScript</li>
-                <li>Communication</li>
-                <li>Problem Solving</li>
-                <li>Teamwork</li>
-            </ul>
-        </section>
-
-        <!-- Contact section -->
-        <section id="contact">
-            <h2>Contact Me</h2>
-
-            <p>
-                I would love to connect and learn about new opportunities.
-            </p>
-
-            <p>
-                Email:
-                <a href="mailto:yourname@example.com">
-                    yourname@example.com
-                </a>
-            </p>
-
-            <p>Location: Your City, Your Country</p>
-
-            <p>
-                LinkedIn:
-                <a href="https://www.linkedin.com/" target="_blank"
-                   rel="noopener noreferrer">
-                    Visit my LinkedIn
-                </a>
-            </p>
-        </section>
-
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900"
+                 alt="Snow-covered mountain peaks">
+        </div>
     </main>
 
-    <!-- Website footer -->
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog"
+         aria-modal="true" aria-label="Image preview">
+
+        <button class="close" id="closeBtn"
+                aria-label="Close image preview">&times;</button>
+
+        <img id="lightboxImage" src="" alt="">
+
+        <p class="caption" id="caption"></p>
+    </div>
+
     <footer>
-        <p>&copy; 2026 Your Name. All rights reserved.</p>
-        <p>Created with HTML and CSS.</p>
+        <p>&copy; 2026 My Image Gallery | Week 2 Web Development</p>
     </footer>
+
+    <script>
+        const images = document.querySelectorAll(".gallery img");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const caption = document.getElementById("caption");
+        const closeBtn = document.getElementById("closeBtn");
+
+        // Open the lightbox when an image is clicked
+        images.forEach(function(image) {
+            image.addEventListener("click", function() {
+                lightboxImage.src = image.src;
+                lightboxImage.alt = image.alt;
+                caption.textContent = image.alt;
+
+                lightbox.classList.add("active");
+                closeBtn.focus();
+            });
+        });
+
+        // Close using the close button
+        function closeLightbox() {
+            lightbox.classList.remove("active");
+            lightboxImage.src = "";
+        }
+
+        closeBtn.addEventListener("click", closeLightbox);
+
+        // Close when clicking the dark background
+        lightbox.addEventListener("click", function(event) {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Close using the Escape key
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+        });
+    </script>
 
 </body>
 </html>
